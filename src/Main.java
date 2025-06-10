@@ -23,8 +23,89 @@ public class Main {
             
             
             if (menuChoice.equals("1")) {
-                System.out.println("");
-            // Add a new question
+                int numPlayers = 0;
+                while (true) {
+                    System.out.println("Enter number of players (2-4): ");
+                    String input = sc.nextLine();
+
+                    // Check if input length > 0 and all digits
+                    boolean validInput = true;
+                    if (input.length() == 0) {
+                         validInput = false;
+                    } else {
+                        for (int i = 0; i < input.length(); i++) {
+                            char ch = input.charAt(i);
+                            if (ch < '0' || ch > '9') {
+                                validInput = false;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (validInput) {
+                        int num = Integer.parseInt(input);
+                        if (num >= 2 && num <= 4) {
+                            numPlayers = num;
+                            break;
+                        } else {
+                            System.out.println("Please enter a number between 2 and 4");
+                        }
+                    } else {
+                        System.out.println("Invalid input. Please pick either 2, 3, or 4 players");
+                    }
+                }
+                String[] playerNames = new String[numPlayers];
+                for (int i = 0; i < numPlayers; i++) {
+                    System.out.printf("Enter name for player: %d", i + 1);
+                    playerNames[i] = sc.nextLine();
+                }
+                System.out.println("Players: ");
+                for (String name : playerNames) {
+                    System.out.println("-" + name);
+                }
+                System.out.println();
+                
+                // Display Game Board (text-based grid)
+                System.out.println("Game Board:");
+
+                 // Find unique categories
+                ArrayList<String> uniqueCategories = new ArrayList<>();
+                 for (int i = 0; i < questionAmount; i++) {
+                    if (!uniqueCategories.contains(categories[i])) {
+                         uniqueCategories.add(categories[i]);
+                    }
+                 }
+
+                // Print categories header
+                for (String cat : uniqueCategories) {
+                    System.out.print(cat + "\t");
+                }
+                System.out.println();
+
+                int maxRows = 5;
+                for (int row = 0; row < maxRows; row++) {
+                    for (String cat : uniqueCategories) {
+                        int pointsToPrint = 0;
+                        int countForCat = 0;
+                        for (int q = 0; q < questionAmount; q++) {
+                            if (categories[q].equals(cat)) {
+                                if (countForCat == row) {
+                                    pointsToPrint = pointAmount[q];
+                                    break;
+                                }
+                                countForCat++;
+                            }
+                        }
+                        if (pointsToPrint == 0) {
+                            System.out.print("\t");
+                        } else {
+                            System.out.print(pointsToPrint + "\t");
+                        }
+                    }
+                    System.out.println();
+                }
+                System.out.println();
+
             } else if (menuChoice.equals("2")) {
                 System.out.println("Enter category:");
                 categories[questionAmount] = sc.nextLine();
@@ -61,7 +142,7 @@ public class Main {
                         System.out.println("Invalid input. Please enter numbers only.");
                 }
             }
-
+            
                 
                 pointAmount[questionAmount] = points;
 
@@ -76,16 +157,15 @@ public class Main {
                 System.out.println("Question has been added! ");
                 System.out.println("Returning to the main menu");
             
-            }
-
-             else if (menuChoice.equals("3")) {
+            } else if (menuChoice.equals("3")) {
                 System.out.println("Thanks for playing!");
                 break;
              } else {
                 System.out.println("Invalid input. Please enter 1, 2, or 3.");
              }
           }
-     }
+                }
+
   }
 
 
