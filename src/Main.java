@@ -170,11 +170,10 @@ public class Main {
                     }
 
                     // Daily Double
-                    int pointValue = pointAmount[questionIndex];
-                    int wager = pointValue;
+                    int wager;
 
                     if (dailyDouble[questionIndex]) {
-                        int maxWager = Math.max(playerScores[currentPlayer], pointValue);
+                        int maxWager = playerScores[currentPlayer];
                         System.out.println("Daily Double! You can wager up to " + maxWager + " points.");
                         while (true) {
                             System.out.print("Enter your wager: ");
@@ -198,6 +197,8 @@ public class Main {
                                 System.out.println("Wager must be between 0 and " + maxWager );
                             }
                         }
+                    } else {
+                        wager = pointAmount[questionIndex];
                     }
 
                     // Ask the question
@@ -279,6 +280,13 @@ public class Main {
                         System.out.print(w + " ");
                     }
                     System.out.println("with " + highScore + " points each!");
+                }
+                
+                System.out.println("Would you like to play again? (yes/no)");
+                String replayChoice = sc.nextLine();    
+                if (!replayChoice.equalsIgnoreCase("yes")) {
+                    System.out.println("Farewell! Thanks for playing Jeopardy!");
+                    break;
                 }
                 
                 System.out.println("Returning to main menu...");
