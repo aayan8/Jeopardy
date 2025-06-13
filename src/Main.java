@@ -214,7 +214,7 @@ public class Main {
                         playerScores[currentPlayer] -= wager;
                     }
 
-                    answered[questionIndex] = true;
+                    answered[questionIndex] = true; 
                     questionsLeft--;
 
                     // Reprint updated board
@@ -354,24 +354,3 @@ public class Main {
 
 
 
-
-
-
-
-
-
-
-
-
-            
-        
-
-        
-
-
-      
-
-
-
-        
-    
